@@ -13,5 +13,18 @@ services:
       - ./db_postgres/init:/docker-entrypoint-initdb.d:ro
       - postgres_data:/var/lib/postgresql/data
 
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_db
+    environment:
+      SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./db_mssql/init:/var/opt/mssql/init
+      - ./db_mssql/data:/var/opt/mssql/data
+    entrypoint: ["/bin/bash", "-c", "./var/opt/mssql/init/entrypoint.sh"]
+
 volumes:
   postgres_data:

@@ -1,5 +1,3 @@
-csc GenerateData.cs
-.\GenerateData.exe
 ---
 find . -type f \( -name "*.sh" -o -name "*.conf" -o -name "*.sql" \) -exec dos2unix {} \;
 ---

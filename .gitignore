@@ -1,3 +1,2 @@
 .env
-mysql_data/
-/mysql/init.zip
+db_mssql/data
