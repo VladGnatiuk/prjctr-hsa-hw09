@@ -72,7 +72,7 @@ Non-reproducible in SNAPSHOT:
 
 ## 3. Non-repeatable read
 
-Non-reproducible in READ COMMITTED, READ operation is blocked!:
+Reproducible in READ COMMITTED, also READ operation is blocked!:
 ![alt text](image-19.png)
 
 Non-reproducible in REPEATABLE READ, SERIALIZABLE. WRITE operation is blocked!
