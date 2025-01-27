@@ -1,11 +1,10 @@
--- Lost update
 -- Session 1
 
-BEGIN TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT txid_current();
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+BEGIN TRANSACTION;
 
-SHOW transaction_isolation;
-
+-- DBCC USEROPTIONS;
+SELECT @@SPID AS 'Transaction ID';
 
 select order_id, qty, product_name from orders where order_id=1;
 
@@ -23,17 +22,18 @@ COMMIT;
 
 
 
-
 select order_id, qty, product_name from orders where order_id=1;
 
 
--- Lost update
+
+
+
 -- Session 2
 
-BEGIN TRANSACTION ISOLATION LEVEL READ COMMITTED;
-SELECT txid_current();
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+BEGIN TRANSACTION;
 
-SHOW transaction_isolation;
+SELECT @@SPID AS 'Transaction ID';
 
 
 select order_id, qty, product_name from orders where order_id=1;
@@ -52,6 +52,11 @@ select order_id, qty, product_name from orders where order_id=1;
 
 
 COMMIT;
+
+
+
+
+
 
 
 

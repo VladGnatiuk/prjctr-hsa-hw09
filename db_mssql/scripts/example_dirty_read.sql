@@ -1,46 +1,36 @@
--- Dirty read
 -- Session 1
 
-BEGIN TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT txid_current();
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+BEGIN TRANSACTION;
 
-SHOW transaction_isolation;
+-- DBCC USEROPTIONS;
+SELECT @@SPID AS 'Transaction ID';
 
+SELECT order_id, product_name FROM orders WHERE order_id=1;
 
-select order_id, product_name from orders where order_id=1;
-
-
-
-
-
-
-
-
-select order_id, product_name from orders where order_id=1;
+UPDATE orders SET product_name=CONCAT(product_name, '-dirty') WHERE order_id=1;
+SELECT order_id, product_name FROM orders WHERE order_id=1;
 
 ROLLBACK;
 
 
--- Dirty read
+
 -- Session 2
 
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 BEGIN TRANSACTION;
-SELECT txid_current();
 
-SHOW transaction_isolation;
-
-
-select order_id, product_name from orders where order_id=1;
+SELECT @@SPID AS 'Transaction ID';
 
 
-update orders set product_name=concat(product_name, '-dirty') where order_id=1;
-
-select order_id, product_name from orders where order_id=1;
+SELECT order_id, product_name FROM orders WHERE order_id=1;
 
 
 
 
-
+SELECT order_id, product_name FROM orders WHERE order_id=1;
 
 ROLLBACK;
 
+
+SELECT order_id, product_name FROM orders WHERE order_id=1;
