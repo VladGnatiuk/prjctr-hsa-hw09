@@ -103,4 +103,5 @@ Reproducible in SNAPSHOT:
 ![alt text](image-26.png)
 
 # Summary
-![alt text](image-27.png)
+![alt text](image-28.png)
+https://docs.google.com/spreadsheets/d/1sWbs3z_XUMJo1kOhZ3mikj6bNDD-mkQgijVvWthM8dM/edit?usp=sharing
